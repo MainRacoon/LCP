@@ -7,12 +7,12 @@
 #include <dirent.h>
 #include <sys/stat.h>
 
-int fsexists(char *path) {
+int fexists(char *path) {
     struct stat buffer;
     return (stat(path, &buffer) == 0);
 }
 
-char**fslist(char*dirname,u64*count){
+char**flist(char*dirname,u64*count){
     DIR *d;
     struct dirent *dir;
     char **file_list = NULL;
@@ -57,7 +57,7 @@ char**fslist(char*dirname,u64*count){
     *count = size;
     return file_list;
 }
-char*fsreadAll(char*filename,u64 *size){
+char*freadAll(char*filename,u64 *size){
     FILE*f=fopen(filename,"rb");
     if(f==NULL){
         return NULL;
@@ -74,7 +74,11 @@ char*fsreadAll(char*filename,u64 *size){
     fclose(f);
     return buf;
 }
-
+void fput(char*filename, char*mode,char*content){
+    FILE*f= fopen(filename,mode);
+    fprintf(f,"%s",content);
+    fclose(f);
+}
 
 
 

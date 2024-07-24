@@ -1,5 +1,5 @@
 #ifndef _CP_FS
-#define _CP_FD
+#define _CP_FS
 
 #include "c+/stdtype.h"
 #include <stdio.h>

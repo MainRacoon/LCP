@@ -5,7 +5,7 @@
 #include <string.h>
 #include "c+/stdtype.h"
 
-char*format(char*format,...) {
+char*strformat(char*format,...) {
     va_list args;
     va_list args_copy;
     u64 needed;
@@ -23,7 +23,7 @@ char*format(char*format,...) {
     va_end(args_copy);
     return buffer;
 }
-char*concat(char* string1,u64 len1, char* string2,u64 len2) {
+char*strconcat(char* string1,u64 len1, char* string2,u64 len2) {
     char* result = (char*)malloc(len1 + len2 + 1);
     if (result == NULL) {
         return NULL;
@@ -33,7 +33,7 @@ char*concat(char* string1,u64 len1, char* string2,u64 len2) {
     result[len1+len2]=0;
     return result;
 }
-boolean charIn(char*string,u64 len, char c){
+bool strcharIn(char*string,u64 len, char c){
     for (u64 i = 0; i < len; ++i) {
         if(string[i]==c){
             return true;
@@ -41,7 +41,7 @@ boolean charIn(char*string,u64 len, char c){
     }
     return false;
 }
-boolean charInAt(char*string,u64 len, char c,u64*at){
+bool strcharInAt(char*string,u64 len, char c,u64*at){
     for (u64 i = 0; i < len; ++i) {
         if(string[i]==c){
             *at=i;
@@ -50,7 +50,7 @@ boolean charInAt(char*string,u64 len, char c,u64*at){
     }
     return false;
 }
-char* substring(char *str,u64 len, u64 from, u64 count) {
+char* strsubstring(char *str,u64 len, u64 from, u64 count) {
     if (from+count > len) {
         return NULL;
     }
@@ -59,7 +59,7 @@ char* substring(char *str,u64 len, u64 from, u64 count) {
     newStr[count]=0;
     return newStr;
 }
-char* substringrange(char *str,u64 len, u64 from, u64 to) {
+char* strsubstringrange(char *str,u64 len, u64 from, u64 to) {
     if (to > len) {
         return NULL;
     }
@@ -68,5 +68,17 @@ char* substringrange(char *str,u64 len, u64 from, u64 to) {
     newStr[to-from]=0;
     return newStr;
 }
+char*strcopy(char* source) {
+    char* copy = (char*)malloc((strlen(source) + 1) * sizeof(char));
+    strcpy(copy, source);
+    return copy;
+}
+char*strctcp(char c){
+    char* str = (char*)malloc(2 * sizeof(char));
+    str[0] = c;
+    str[1] = '\0';
+    return str;
+}
+#define streq(str1, str2) (strcmp(str1, str2)==0)
 #endif
 

@@ -29,7 +29,7 @@ struct{
         colorscheme highintensity;
     }background;
     const char*reset;
-}stdclr={
+}stdcolor={
         .reset="\e[0m",
         .text={
                 .normal={
